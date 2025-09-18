@@ -158,18 +158,18 @@ export class Game extends Scene {
       fontSize: '14px',
     });
 
-    // Game over text (hidden initially)
+    // Game over text (hidden initially) - simplified and properly sized
     this.gameOverText = this.add
       .text(
         this.scale.width / 2,
         this.scale.height / 2,
-        'ZOMBIE APOCALYPSE!\\nPress R to Restart',
+        'GAME OVER\\nPress R to Restart',
         {
-          fontFamily: 'Creepster, Arial Black',
-          fontSize: '48px',
+          fontFamily: 'Arial Black',
+          fontSize: '32px',
           color: '#ff0000',
-          stroke: '#000000',
-          strokeThickness: 4,
+          stroke: '#ffffff',
+          strokeThickness: 3,
           align: 'center',
         }
       )

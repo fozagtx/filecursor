@@ -1,73 +1,82 @@
 import { Scene } from 'phaser';
-import * as Phaser from 'phaser';
 
 export class GameOver extends Scene {
-  camera: Phaser.Cameras.Scene2D.Camera;
-  background: Phaser.GameObjects.Image;
-  gameover_text: Phaser.GameObjects.Text;
-
   constructor() {
     super('GameOver');
   }
 
   create() {
-    // Configure camera
-    this.camera = this.cameras.main;
-    if (this.camera) {
-      this.camera.setBackgroundColor(0xff0000);
-    }
+    const { width, height } = this.scale;
 
-    // Background – create once, full-screen
-    this.background = this.add
-      .image(0, 0, 'background')
-      .setOrigin(0)
-      .setAlpha(0.5);
+    // Dark background
+    this.cameras.main.setBackgroundColor(0x220000);
 
-    // "Game Over" text – created once and scaled responsively
-    this.gameover_text = this.add
-      .text(0, 0, 'Game Over', {
+    // Dark overlay
+    this.add.rectangle(width / 2, height / 2, width, height, 0x000000, 0.7);
+
+    // "Game Over" text - properly positioned and sized
+    const gameOverText = this.add
+      .text(width / 2, height * 0.35, 'GAME OVER', {
         fontFamily: 'Arial Black',
-        fontSize: '64px',
-        color: '#ffffff',
-        stroke: '#000000',
-        strokeThickness: 8,
+        fontSize: Math.min(48, width * 0.08).toString() + 'px',
+        color: '#ff0000',
+        stroke: '#ffffff',
+        strokeThickness: 3,
         align: 'center',
       })
       .setOrigin(0.5);
 
-    // Initial responsive layout
-    this.updateLayout(this.scale.width, this.scale.height);
+    // Restart instruction - clear and visible
+    const restartText = this.add
+      .text(width / 2, height * 0.55, 'PRESS R TO RESTART', {
+        fontFamily: 'Arial Black',
+        fontSize: Math.min(24, width * 0.04).toString() + 'px',
+        color: '#ffff00',
+        stroke: '#000000',
+        strokeThickness: 2,
+        align: 'center',
+      })
+      .setOrigin(0.5);
 
-    // Update layout on canvas resize / orientation change
-    this.scale.on('resize', (gameSize: Phaser.Structs.Size) => {
-      const { width, height } = gameSize;
-      this.updateLayout(width, height);
+    // Menu instruction
+    const menuText = this.add
+      .text(width / 2, height * 0.65, 'OR CLICK FOR MENU', {
+        fontFamily: 'Arial',
+        fontSize: Math.min(18, width * 0.03).toString() + 'px',
+        color: '#ffcccc',
+        stroke: '#000000',
+        strokeThickness: 1,
+        align: 'center',
+      })
+      .setOrigin(0.5);
+
+    // Make restart text pulse
+    this.tweens.add({
+      targets: restartText,
+      alpha: 0.5,
+      duration: 800,
+      yoyo: true,
+      repeat: -1,
+      ease: 'Sine.easeInOut',
     });
 
-    // Return to Main Menu on tap / click
-    this.input.once('pointerdown', () => {
+    // Keyboard restart
+    this.input.keyboard?.addKey('R')?.on('down', () => {
+      this.scene.start('Game');
+    });
+
+    // Click to return to menu
+    this.input.on('pointerdown', () => {
       this.scene.start('MainMenu');
     });
-  }
 
-  private updateLayout(width: number, height: number): void {
-    // Resize camera viewport to prevent black bars
-    if (this.cameras && this.cameras.main) {
-      this.cameras.resize(width, height);
-    }
+    // Also allow SPACE and ENTER to restart
+    this.input.keyboard?.addKey('SPACE')?.on('down', () => {
+      this.scene.start('Game');
+    });
 
-    // Stretch background to fill entire screen
-    if (this.background) {
-      this.background.setDisplaySize(width, height);
-    }
-
-    // Compute scale factor (never enlarge above 1×)
-    const scaleFactor = Math.min(Math.min(width / 1024, height / 768), 1);
-
-    // Centre and scale the game-over text
-    if (this.gameover_text) {
-      this.gameover_text.setPosition(width / 2, height / 2);
-      this.gameover_text.setScale(scaleFactor);
-    }
+    this.input.keyboard?.addKey('ENTER')?.on('down', () => {
+      this.scene.start('Game');
+    });
   }
 }
