@@ -13,10 +13,15 @@ export class GameOver extends Scene {
   create() {
     // Configure camera
     this.camera = this.cameras.main;
-    this.camera.setBackgroundColor(0xff0000);
+    if (this.camera) {
+      this.camera.setBackgroundColor(0xff0000);
+    }
 
     // Background – create once, full-screen
-    this.background = this.add.image(0, 0, 'background').setOrigin(0).setAlpha(0.5);
+    this.background = this.add
+      .image(0, 0, 'background')
+      .setOrigin(0)
+      .setAlpha(0.5);
 
     // "Game Over" text – created once and scaled responsively
     this.gameover_text = this.add
@@ -47,7 +52,9 @@ export class GameOver extends Scene {
 
   private updateLayout(width: number, height: number): void {
     // Resize camera viewport to prevent black bars
-    this.cameras.resize(width, height);
+    if (this.cameras && this.cameras.main) {
+      this.cameras.resize(width, height);
+    }
 
     // Stretch background to fill entire screen
     if (this.background) {

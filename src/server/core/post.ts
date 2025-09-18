@@ -8,9 +8,9 @@ export const createPost = async () => {
 
   return await reddit.submitCustomPost({
     splash: {
-      appDisplayName: '<% name %>',
+      appDisplayName: 'Zombtris',
     },
     subredditName: subredditName,
-    title: '<% name %>',
+    title: 'Zombtris - Zombie Apocalypse Puzzle Game',
   });
 };

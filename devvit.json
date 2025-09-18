@@ -16,8 +16,8 @@
   "menu": {
     "items": [
       {
-        "label": "Create a new post",
-        "description": "<% name %>",
+        "label": "Create Zombtris Game",
+        "description": "Start a Zombtris game - Survive the zombie apocalypse!",
         "location": "subreddit",
         "forUserType": "moderator",
         "endpoint": "/internal/menu/post-create"

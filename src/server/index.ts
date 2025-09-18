@@ -1,5 +1,9 @@
 import express from 'express';
-import { InitResponse, IncrementResponse, DecrementResponse } from '../shared/types/api';
+import {
+  InitResponse,
+  IncrementResponse,
+  DecrementResponse,
+} from '../shared/types/api';
 import { redis, createServer, context } from '@devvit/web/server';
 import { createPost } from './core/post';
 
@@ -14,77 +18,129 @@ app.use(express.text());
 
 const router = express.Router();
 
-router.get<{ postId: string }, InitResponse | { status: string; message: string }>(
-  '/api/init',
-  async (_req, res): Promise<void> => {
-    const { postId } = context;
+router.get<
+  { postId: string },
+  InitResponse | { status: string; message: string }
+>('/api/init', async (_req, res): Promise<void> => {
+  const { postId } = context;
 
-    if (!postId) {
-      console.error('API Init Error: postId not found in devvit context');
-      res.status(400).json({
-        status: 'error',
-        message: 'postId is required but missing from context',
-      });
-      return;
-    }
-
-    try {
-      const count = await redis.get('count');
-      res.json({
-        type: 'init',
-        postId: postId,
-        count: count ? parseInt(count) : 0,
-      });
-    } catch (error) {
-      console.error(`API Init Error for post ${postId}:`, error);
-      let errorMessage = 'Unknown error during initialization';
-      if (error instanceof Error) {
-        errorMessage = `Initialization failed: ${error.message}`;
-      }
-      res.status(400).json({ status: 'error', message: errorMessage });
-    }
+  if (!postId) {
+    console.error('API Init Error: postId not found in devvit context');
+    res.status(400).json({
+      status: 'error',
+      message: 'postId is required but missing from context',
+    });
+    return;
   }
-);
 
-router.post<{ postId: string }, IncrementResponse | { status: string; message: string }, unknown>(
-  '/api/increment',
-  async (_req, res): Promise<void> => {
-    const { postId } = context;
-    if (!postId) {
-      res.status(400).json({
-        status: 'error',
-        message: 'postId is required',
-      });
-      return;
+  try {
+    const count = await redis.get('count');
+    res.json({
+      type: 'init',
+      postId: postId,
+      count: count ? parseInt(count) : 0,
+    });
+  } catch (error) {
+    console.error(`API Init Error for post ${postId}:`, error);
+    let errorMessage = 'Unknown error during initialization';
+    if (error instanceof Error) {
+      errorMessage = `Initialization failed: ${error.message}`;
+    }
+    res.status(400).json({ status: 'error', message: errorMessage });
+  }
+});
+
+router.post<
+  { postId: string },
+  IncrementResponse | { status: string; message: string },
+  unknown
+>('/api/increment', async (_req, res): Promise<void> => {
+  const { postId } = context;
+  if (!postId) {
+    res.status(400).json({
+      status: 'error',
+      message: 'postId is required',
+    });
+    return;
+  }
+
+  res.json({
+    count: await redis.incrBy('count', 1),
+    postId,
+    type: 'increment',
+  });
+});
+
+router.post<
+  { postId: string },
+  DecrementResponse | { status: string; message: string },
+  unknown
+>('/api/decrement', async (_req, res): Promise<void> => {
+  const { postId } = context;
+  if (!postId) {
+    res.status(400).json({
+      status: 'error',
+      message: 'postId is required',
+    });
+    return;
+  }
+
+  res.json({
+    count: await redis.incrBy('count', -1),
+    postId,
+    type: 'decrement',
+  });
+});
+
+// Score endpoint for Zombtris game
+router.post('/api/score', async (req, res): Promise<void> => {
+  const { postId } = context;
+  if (!postId) {
+    res.status(400).json({
+      status: 'error',
+      message: 'postId is required',
+    });
+    return;
+  }
+
+  try {
+    const { score, lines, level, survivors } = req.body;
+
+    // Store the score in Redis with a key based on postId
+    const scoreKey = `score:${postId}`;
+    const scoreData = {
+      score: score || 0,
+      lines: lines || 0,
+      level: level || 1,
+      survivors: survivors || 0,
+      timestamp: Date.now(),
+    };
+
+    await redis.set(scoreKey, JSON.stringify(scoreData));
+
+    // Optionally store high score
+    const highScoreKey = `highscore:${postId}`;
+    const currentHighScore = await redis.get(highScoreKey);
+    const currentScore = score || 0;
+
+    if (!currentHighScore || currentScore > parseInt(currentHighScore)) {
+      await redis.set(highScoreKey, currentScore.toString());
     }
 
     res.json({
-      count: await redis.incrBy('count', 1),
+      status: 'success',
+      message: 'Score saved successfully',
+      score: currentScore,
       postId,
-      type: 'increment',
+    });
+  } catch (error) {
+    console.error('Error saving score:', error);
+    res.status(500).json({
+      status: 'error',
+      message: 'Failed to save score',
     });
   }
-);
-
-router.post<{ postId: string }, DecrementResponse | { status: string; message: string }, unknown>(
-  '/api/decrement',
-  async (_req, res): Promise<void> => {
-    const { postId } = context;
-    if (!postId) {
-      res.status(400).json({
-        status: 'error',
-        message: 'postId is required',
-      });
-      return;
-    }
-
-    res.json({
-      count: await redis.incrBy('count', -1),
-      postId,
-      type: 'decrement',
-    });
-  }
-);
+});
 
 router.post('/internal/on-app-install', async (_req, res): Promise<void> => {
   try {

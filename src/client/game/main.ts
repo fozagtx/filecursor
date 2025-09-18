@@ -11,14 +11,34 @@ import { Preloader } from './scenes/Preloader';
 const config: Phaser.Types.Core.GameConfig = {
   type: AUTO,
   parent: 'game-container',
-  backgroundColor: '#028af8',
+  backgroundColor: '#1a0000',
   scale: {
-    // Keep a fixed game resolution but automatically scale it to fit within the available
-    // web-view / device while maintaining aspect ratio.
-    mode: Phaser.Scale.RESIZE,
+    // Mobile-optimized scaling
+    mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
-    width: 1024,
-    height: 768,
+    width: Math.min(window.innerWidth || 1024, 1024),
+    height: Math.min(window.innerHeight || 768, 768),
+    min: {
+      width: 320,
+      height: 480,
+    },
+    max: {
+      width: 1024,
+      height: 768,
+    },
+  },
+  input: {
+    // Better mobile touch support
+    touch: true,
+    mouse: true,
+    activePointers: 1,
+  },
+  physics: {
+    default: 'arcade',
+    arcade: {
+      gravity: { y: 0, x: 0 },
+      debug: false,
+    },
   },
   scene: [Boot, Preloader, MainMenu, MainGame, GameOver],
 };
