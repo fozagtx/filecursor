@@ -1,11 +1,11 @@
-
 import { createTool } from '@mastra/core/tools';
 import { z } from 'zod';
 import axios from 'axios';
 
 export const braveSearchTool = createTool({
   id: 'brave-search',
-  description: 'Searches the web using the Brave Search API, focusing on Filecoin documentation.',
+  description:
+    'Searches the web using the Brave Search API, focusing on Filecoin documentation.',
   inputSchema: z.object({
     query: z.string().describe('The search query.'),
   }),
@@ -27,25 +27,87 @@ export const braveSearchTool = createTool({
     }
 
     try {
-      const response = await axios.get('https://api.search.brave.com/res/v1/web/search', {
-        headers: {
-          'X-Subscription-Token': apiKey,
-        },
-        params: {
-          q: `${query} site:docs.filecoin.io`,
-        },
-      });
+      const response = await axios.get(
+        'https://api.search.brave.com/res/v1/web/search',
+        {
+          headers: {
+            'X-Subscription-Token': apiKey,
+            'Accept': 'application/json',
+            'User-Agent': 'Mastra-Filecoin-Agent/1.0',
+          },
+          params: {
+            q: query,
+            count: 10,
+            search_lang: 'en',
+            country: 'us',
+            safesearch: 'moderate',
+            freshness: 'pd',
+            text_decorations: false,
+          },
+          timeout: 10000,
+        }
+      );
 
-      const results = response.data.web.results.map((result: any) => ({
-        title: result.title,
-        url: result.url,
-        description: result.description,
-      }));
+      // Check if response has web results
+      if (!response.data || !response.data.web || !response.data.web.results) {
+        return { results: [] };
+      }
+
+      const results = response.data.web.results
+        .slice(0, 5)
+        .map((result: any) => ({
+          title: result.title || 'No title',
+          url: result.url || '',
+          description:
+            result.description || result.snippet || 'No description available',
+        }));
 
       return { results };
-    } catch (error) {
-      console.error('Error searching with Brave:', error);
-      throw new Error('Failed to perform search with Brave.');
+    } catch (error: any) {
+      console.error('Error searching with Brave:', {
+        message: error.message,
+        status: error.response?.status,
+        statusText: error.response?.statusText,
+        data: error.response?.data,
+      });
+
+      // Fallback to basic search without site restriction if 422 error
+      if (error.response?.status === 422) {
+        try {
+          const fallbackResponse = await axios.get(
+            'https://api.search.brave.com/res/v1/web/search',
+            {
+              headers: {
+                'X-Subscription-Token': apiKey,
+                'Accept': 'application/json',
+              },
+              params: {
+                q: query,
+                count: 5,
+              },
+              timeout: 10000,
+            }
+          );
+
+          if (fallbackResponse.data?.web?.results) {
+            const results = fallbackResponse.data.web.results
+              .slice(0, 3)
+              .map((result: any) => ({
+                title: result.title || 'No title',
+                url: result.url || '',
+                description:
+                  result.description ||
+                  result.snippet ||
+                  'No description available',
+              }));
+            return { results };
+          }
+        } catch (fallbackError) {
+          console.error('Fallback search also failed:', fallbackError);
+        }
+      }
+
+      return { results: [] };
     }
   },
 });
