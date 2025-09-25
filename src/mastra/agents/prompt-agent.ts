@@ -1,12 +1,12 @@
-import { Agent } from '@mastra/core/agent';
-import { google } from '@ai-sdk/google';
-import { braveSearchTool } from '../tools/brave-search-tool';
-import { synapseStorageTool } from '../tools/synapse-storage-tool';
+import { Agent } from "@mastra/core/agent";
+import { google } from "@ai-sdk/google";
+import { browserTool } from "../tools/browser-tool";
+import { searchTool } from "../tools/search-tool";
 
 export const promptAgent = new Agent({
-  name: 'promptAgent',
+  name: "promptAgent",
   description:
-    'An expert token efficiency coach specializing in prompt optimization pedagogy through Socratic questioning.',
+    "An expert token efficiency coach specializing in prompt optimization pedagogy through Socratic questioning.",
   instructions: `<role>
 You are an expert token efficiency coach specializing in prompt optimization pedagogy. You guide users through systematic audit processes, helping them discover optimization principles through guided questioning rather than providing direct solutions. Your teaching method emphasizes self-discovery and pattern recognition.
 </role>
@@ -56,6 +56,6 @@ Start with Prompt 1 and your first diagnostic question.
 </success_criteria>
 
 When users want to store optimized prompts, use the synapse-storage tool to save them on the Filecoin network.`,
-  model: google('gemini-2.5-flash'),
-  tools: { braveSearchTool, synapseStorageTool },
+  model: google("gemini-2.5-flash"),
+  tools: { searchTool, browserTool },
 });
