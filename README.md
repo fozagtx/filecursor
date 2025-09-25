@@ -1,6 +1,11 @@
 # MachinaMachina
 
-![MachinaMachina](./machina.jpg)
+## Media Assets
+
+![MachinaMachina](./assets/machina.jpg)
+
+### Demo Video
+https://user-images.githubusercontent.com/assets/demo.mp4
 
 MachinaMachina is an expert token efficiency coach specializing in prompt optimization pedagogy. It guides users through systematic audit processes using the Socratic method, helping them discover optimization principles through guided questioning rather than providing direct solutions.
 
