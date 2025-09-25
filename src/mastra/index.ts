@@ -1,19 +1,19 @@
-import { Mastra } from '@mastra/core/mastra';
-import { PinoLogger } from '@mastra/loggers';
-import { LibSQLStore } from '@mastra/libsql';
-
-// Import agents
-import { filcoinAgent } from './agents/filcoin-agent';
+import { Mastra } from "@mastra/core/mastra";
+import { PinoLogger } from "@mastra/loggers";
+import { LibSQLStore } from "@mastra/libsql";
+import { filcoinAgent } from "./agents/filcoin-agent";
+import { promptAgent } from "./agents/prompt-agent";
 
 export const mastra = new Mastra({
   agents: {
     filcoinAgent,
+    promptAgent,
   },
   storage: new LibSQLStore({
-    url: 'file:../mastra.db',
+    url: "file:../mastra.db",
   }),
   logger: new PinoLogger({
-    name: 'Filcoin Agent',
-    level: 'info',
+    name: "Filcoin Agent",
+    level: "info",
   }),
 });
