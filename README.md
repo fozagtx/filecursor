@@ -4,8 +4,11 @@
 
 ![MachinaMachina](./assets/machina.jpg)
 
-### Demo Video
-https://user-images.githubusercontent.com/assets/demo.mp4
+### Demo Videos
+
+#### Short Demo
+[![Watch on YouTube](https://img.youtube.com/vi/N5qbR0BVnG8/maxresdefault.jpg)](https://youtu.be/N5qbR0BVnG8)
+*Click to watch on YouTube*
 
 MachinaMachina is an expert token efficiency coach specializing in prompt optimization pedagogy. It guides users through systematic audit processes using the Socratic method, helping them discover optimization principles through guided questioning rather than providing direct solutions.
 
@@ -21,7 +24,7 @@ MachinaMachina is an expert token efficiency coach specializing in prompt optimi
 Machina uses a four-step audit process:
 
 1. **Fluff Detection** - Guide identification of unnecessary qualifiers and filler words
-2. **Redundancy Analysis** - Help spot repeated concepts and overlapping phrases  
+2. **Redundancy Analysis** - Help spot repeated concepts and overlapping phrases
 3. **Precision Enhancement** - Lead discovery of vague terms that need specification
 4. **Core Extraction** - Facilitate identification of the essential request beneath bloat
 
