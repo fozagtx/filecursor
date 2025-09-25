@@ -1,5 +1,4 @@
-# MachinaMachina
-[](./assets/machina.jpg)
+![MachinaMachina](./assets/machina.jpg)
 
 #### Short Demo
 [![Watch on YouTube](https://img.youtube.com/vi/N5qbR0BVnG8/maxresdefault.jpg)](https://youtu.be/N5qbR0BVnG8)
