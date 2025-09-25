@@ -1,40 +1,37 @@
-# Ad Copy Generation Template
+# MachinaMachina
 
-A Mastra template that generates compelling ad copy and promotional images from content provided as plain text, PDF links, or website URLs. Features AI-powered copywriting with web content extraction and image generation capabilities.
+![MachinaMachina](./machina.jpg)
 
-## Features
+MachinaMachina is an expert token efficiency coach specializing in prompt optimization pedagogy. It guides users through systematic audit processes using the Socratic method, helping them discover optimization principles through guided questioning rather than providing direct solutions.
 
-- **Content Processing**: Extract and analyze content from PDFs, plain text, or website URLs
-- **Web Content Extraction**: Extract blog posts and articles from websites using AI-powered web browsing
-- **Ad Copy Generation**: Create headlines, body copy, and CTAs for multiple platforms
-- **Image Generation**: Generate promotional images using DALL-E 3 via the AI package
-- **Platform Optimization**: Tailored content for Facebook, Instagram, Google Ads, LinkedIn, and more
-- **A/B Testing**: Multiple variations for testing and optimization
+## What Machina Does
+
+- **Socratic Teaching**: Guides discovery through targeted questions instead of giving answers
+- **Prompt Auditing**: Systematic analysis of bloated, inefficient prompts
+- **Pattern Recognition**: Helps users identify common optimization opportunities
+- **Filecoin Storage**: Store and retrieve optimized prompts on Filecoin network
+
+## Core Methodology
+
+Machina uses a four-step audit process:
+
+1. **Fluff Detection** - Guide identification of unnecessary qualifiers and filler words
+2. **Redundancy Analysis** - Help spot repeated concepts and overlapping phrases  
+3. **Precision Enhancement** - Lead discovery of vague terms that need specification
+4. **Core Extraction** - Facilitate identification of the essential request beneath bloat
 
 ## Quick Start
 
 1. **Install dependencies**:
-
    ```bash
    pnpm install
    ```
 
-2. **Set up environment variables**:
-   Create a `.env` file with:
-
+2. **Set up environment**:
+   Create a `.env` file with your API keys:
    ```
-   OPENAI_API_KEY=your_openai_api_key
-
-   # For web content extraction (optional - only needed for URL input type)
-   BROWSERBASE_API_KEY=your_browserbase_api_key
-   BROWSERBASE_PROJECT_ID=your_browserbase_project_id
-
-   # For AWS S3 cloud storage (required for image generation)
-   AWS_REGION=us-east-1
-   AWS_ACCESS_KEY_ID=your_aws_access_key_id
-   AWS_SECRET_ACCESS_KEY=your_aws_secret_access_key
-   S3_BUCKET_NAME=mastra-generated-images
-   S3_PUBLIC_URL_BASE=https://your-bucket-name.s3.amazonaws.com
+   GOOGLE_GENERATIVE_AI_API_KEYGOOGLE_GENERATIVE_AI_API_KEY=your_google_api_keyyour_google_api_key
+   FILECOIN_API_KEY=your_filecoin_api_key
    ```
 
 3. **Run the application**:
@@ -42,200 +39,100 @@ A Mastra template that generates compelling ad copy and promotional images from 
    pnpm dev
    ```
 
-## Usage Examples
+## Key Features
 
-### Using the Workflow
+### Guided Prompt Optimization
+- Socratic questioning to identify inefficiencies
+- Step-by-step audit workflow
+- Self-discovery learning approach
+- Pattern recognition training
+
+### Filecoin Integration
+- Store optimized prompts permanently
+- Retrieve prompt libraries
+- Decentralized prompt management
+- Version control for prompt iterations
+
+### Audit Categories
+- **Fluff Words**: "What words add no functional value?"
+- **Redundancy**: "Where do you see repeated concepts?"
+- **Precision Gaps**: "Which terms are too vague to be actionable?"
+- **Core Request**: "What is the essential ask here?"
+
+## Usage
 
 ```typescript
 import { mastra } from './src/mastra';
 
-// Generate ad copy from text content
-const result = await mastra.runWorkflow('ad-copy-generation-workflow', {
-  contentInput: 'Your product description or marketing content here...',
-  inputType: 'text',
-  platform: 'facebook',
-  campaignType: 'conversion',
-  targetAudience: 'Small business owners aged 25-45',
-  tone: 'professional',
-  generateImages: true,
-  imageStyle: 'modern',
+// Start prompt optimization session
+const result = await mastra.runWorkflow('prompt-audit-workflow', {
+  bloatedPrompt: 'Your verbose prompt here...',
+  auditLevel: 'comprehensive',
+  storageOption: 'filecoin'
 });
 
-// Generate ad copy from PDF
-const pdfResult = await mastra.runWorkflow('ad-copy-generation-workflow', {
-  contentInput: 'https://example.com/product-brochure.pdf',
-  inputType: 'pdf',
-  platform: 'linkedin',
-  campaignType: 'awareness',
-  tone: 'authoritative',
-});
-
-// Generate ad copy from website URL
-const urlResult = await mastra.runWorkflow('ad-copy-generation-workflow', {
-  contentInput: 'https://techcrunch.com/example-startup-article',
-  inputType: 'url',
-  platform: 'instagram',
-  campaignType: 'consideration',
-  targetAudience: 'Tech enthusiasts and early adopters',
-  tone: 'playful',
-  generateImages: true,
-  imageStyle: 'digital_art',
+// Store optimized prompt on Filecoin
+const storage = await mastra.getTool('filecoin-storage').execute({
+  prompt: optimizedPrompt,
+  category: 'business-strategy',
+  tags: ['efficiency', 'marketing']
 });
 ```
 
-### Using Individual Agents
+## Learning Process
 
-```typescript
-// Generate ad copy directly
-const adCopy = await mastra.getAgent('adCopyAgent').generate([
-  {
-    role: 'user',
-    content: 'Create Facebook ad copy for a new productivity app targeting remote workers',
-  },
-]);
+1. **Submit Bloated Prompt** - Provide inefficient prompt for analysis
+2. **Guided Questioning** - Answer targeted diagnostic questions
+3. **Pattern Discovery** - Identify optimization opportunities yourself
+4. **Core Extraction** - Distill to essential request
+5. **Filecoin Storage** - Save optimized version permanently
 
-// Extract content from PDF
-const pdfContent = await mastra.getTool('pdf-content-extractor').execute({
-  context: { pdfUrl: 'https://example.com/whitepaper.pdf' },
-  mastra,
-});
-```
+## Audit Workflow
+
+### Question Types
+- "What words here add no functional value to the request?"
+- "Where do you see the same concept expressed multiple times?"
+- "Which terms are too vague to be actionable?"
+- "If you had to express this in one clear sentence, what would it be?"
+
+### Success Criteria
+- User actively identifies specific inefficiencies
+- User develops pattern recognition skills
+- User can articulate core requests clearly
+- User gains systematic optimization confidence
 
 ## Components
 
-### Agents
+### Teaching Engine
+- Socratic questioning system
+- Progressive disclosure of insights
+- Adaptive questioning based on user progress
 
-1. **Ad Copy Agent** - Main agent that orchestrates the ad copy generation process
-2. **Content Summarizer Agent** - Creates marketing-focused summaries from content
-3. **Copywriting Agent** - Expert copywriter for creating high-converting ad copy
-4. **Web Content Agent** - Extracts content from websites and blog posts for ad copy generation
+### Filecoin Integration
+- Decentralized prompt storage
+- Immutable optimization history
+- Community prompt sharing
+- Cross-device synchronization
 
-### Tools
-
-1. **PDF Content Extractor** - Downloads and extracts marketing insights from PDFs
-2. **Web Content Extractor** - Extracts blog posts and articles from websites using AI-powered browsing
-3. **Page Navigate Tool** - Navigates to web URLs for content extraction
-4. **Ad Copy Generator** - Creates multiple ad copy variations for different platforms
-5. **Image Generator** - Generates promotional images using DALL-E 3
-
-### Workflows
-
-**Ad Copy Generation Workflow**: Simplified end-to-end process that:
-
-1. Extracts content (from PDF, website URL, or text)
-2. Generates optimized ad copy (headline, body, CTA)
-3. Creates a promotional image and uploads to S3
-
-## Platform Support
-
-- **Facebook/Instagram**: Optimized for social media advertising
-- **Google Ads**: Search-intent focused copy
-- **LinkedIn**: Professional, B2B-oriented content
-- **Twitter**: Concise, trending-aware copy
-- **TikTok**: Engaging, video-focused copy
-- **Generic**: Platform-agnostic advertising copy
-
-## Campaign Types
-
-- **Awareness**: Brand awareness and reach campaigns
-- **Consideration**: Lead generation and engagement
-- **Conversion**: Sales and action-driven campaigns
-- **Retention**: Customer retention and loyalty
-
-## Output Examples
-
-The workflow generates:
-
-### Ad Copy
-
-- Single optimized headline
-- Compelling body copy
-- Effective call-to-action
-
-### Image
-
-- One promotional image uploaded to S3
-- Platform-optimized dimensions
-- Style-consistent visual design
-
-## Advanced Configuration
-
-### Expected Output Structure
-
-```typescript
-const result = await mastra.runWorkflow('ad-copy-generation-workflow', {
-  // ... input params
-});
-
-// Result structure:
-{
-  adCopy: {
-    headline: "Your optimized headline",
-    body: "Compelling body copy for your ad",
-    cta: "Call to action"
-  },
-  imageUrl: "https://your-bucket.s3.amazonaws.com/generated-images/uuid.jpg" // Optional
-}
-```
-
-### Specific Focus Areas
-
-```typescript
-const result = await mastra.getTool('pdf-content-extractor').execute({
-  context: {
-    pdfUrl: 'https://example.com/content.pdf',
-    focusAreas: ['benefits', 'pricing', 'testimonials'],
-  },
-  mastra,
-});
-```
+### Audit Tools
+- Fluff detection algorithms
+- Redundancy pattern matching
+- Precision gap analysis
+- Core extraction validation
 
 ## Development
 
-To modify or extend this template:
+To extend MachinaMachina:
 
-1. **Add new platforms**: Update the platform enums in the schemas
-2. **Customize copy styles**: Modify the copywriting agent instructions
-3. **Add new image styles**: Extend the image generation tool
-4. **Create new workflows**: Combine tools and agents in different ways
-
-## Environment Variables
-
-### Required
-
-- `OPENAI_API_KEY`: Required for AI generation (OpenAI GPT-4)
-
-### Optional (based on features used)
-
-- `BROWSERBASE_API_KEY`: Required for web content extraction (BrowserBase)
-- `BROWSERBASE_PROJECT_ID`: Required for web content extraction (BrowserBase)
-
-### AWS S3 Cloud Storage (required for image generation)
-
-- `AWS_REGION`: AWS region (default: 'us-east-1')
-- `AWS_ACCESS_KEY_ID`: AWS access key ID
-- `AWS_SECRET_ACCESS_KEY`: AWS secret access key
-- `S3_BUCKET_NAME`: S3 bucket name for storing generated images (default: 'mastra-generated-images')
-- `S3_PUBLIC_URL_BASE`: Public URL base for accessing uploaded images
-
-### AWS S3 Setup Example
-
-```env
-AWS_REGION=us-east-1
-AWS_ACCESS_KEY_ID=your_aws_access_key_id
-AWS_SECRET_ACCESS_KEY=your_aws_secret_access_key
-S3_BUCKET_NAME=mastra-generated-images
-S3_PUBLIC_URL_BASE=https://mastra-generated-images.s3.amazonaws.com
-```
-
-**Note**: Make sure your S3 bucket is configured for public read access for the generated images to be accessible via the public URLs.
+1. **Add question templates**: Expand Socratic questioning library
+2. **Create audit categories**: Define new optimization patterns
+3. **Implement storage options**: Extend Filecoin integration
+4. **Build learning paths**: Create progressive skill modules
 
 ## Dependencies
 
-- `@mastra/core`: Core Mastra framework
-- `@ai-sdk/openai`: OpenAI integration
-- `@aws-sdk/client-s3`: S3-compatible cloud storage (for image uploads)
-- `@browserbasehq/stagehand`: Web browsing and content extraction
-- `pdf2json`: PDF text extraction
-- `ai`: AI SDK for image generation
+- `@mastra/core`: Core framework
+- `@googlegoogle/generative-aigenerative-ai`: Google Generative AIGoogle Generative AI integration
+- `@filecoin/client`: Filecoin storage integration
+- `ai`: AI SDK
 - `zod`: Schema validation
