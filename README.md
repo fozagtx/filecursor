@@ -12,7 +12,7 @@ MachinaMachina gives you three AI agents that work together:
 
 **Filecoin Agent** - Handles decentralized storage on Filecoin network. Opens browser sessions, requests testnet tokens, and provides real-time education.
 
-**Synthik Agent** - Generates synthetic datasets for any use case. Creates training data, test data, and human-readable content.
+**Synthik Agent** - Powered by Synthik Labs API, generates high-quality synthetic datasets for any use case. Creates training data, test data, and human-readable content using advanced AI models.
 
 ## Quick Start
 
@@ -39,7 +39,7 @@ BRAVE_SEARCH_API_KEY=your_key
 
 **Decentralized Storage** - Permanent storage on Filecoin network
 
-**Dataset Generation** - Custom synthetic data for ML training and testing
+**Synthik Dataset Generation** - Custom synthetic data for ML training and testing powered by Synthik Labs
 
 ## How It Works
 
@@ -47,7 +47,7 @@ The Prompt Agent uses Socratic questioning to help you identify inefficiencies i
 
 The Filecoin Agent opens browsers to help you navigate Filecoin hosting, automatically requests testnet tokens (USDC & tFIL), and teaches you about decentralized storage.
 
-The Synthik Agent creates realistic datasets based on your specifications, adapting to any domain or industry requirements.
+The Synthik Agent leverages Synthik Labs' advanced API to create realistic datasets based on your specifications, adapting to any domain or industry requirements with high-quality synthetic data generation.
 
 ## Tech Stack
 
@@ -59,8 +59,8 @@ Built on Mastra AI framework with Google Generative AI, Filecoin network integra
 
 - Reduce AI API costs through prompt optimization
 - Store optimized prompts permanently on decentralized storage
-- Generate training data for machine learning models
-- Create realistic test datasets for applications
+- Generate training data for machine learning models using Synthik Labs
+- Create realistic test datasets for applications with Synthik's synthetic data engine
 - Learn prompt engineering through guided practice
 
 ## Documentation
