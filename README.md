@@ -17,8 +17,8 @@ MachinaMachina gives you three AI agents that work together:
 ## Quick Start
 
 ```bash
-git clone https://github.com/fozagtx/machinalabs
-cd machinalabs
+git clone https://github.com/fozagtx/machina-labs
+cd machina-labs
 pnpm install
 pnpm dev
 ```
