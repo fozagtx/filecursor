@@ -1,140 +1,71 @@
-![MachinaMachina](./assets/machina.jpg)
+# Machina Labs
 
-#### Short Demo
-[![Watch on YouTube](https://img.youtube.com/vi/N5qbR0BVnG8/maxresdefault.jpg)](https://youtu.be/N5qbR0BVnG8)
-*Click to watch on YouTube*
+Multi-agent platform for prompt optimization, decentralized storage, and synthetic data generation.
 
-MachinaMachina is an expert token efficiency coach specializing in prompt optimization pedagogy. It guides users through systematic audit processes using the Socratic method, helping them discover optimization principles through guided questioning rather than providing direct solutions.
+![MachinaLabs](./assets/machina.jpg)
 
-## What Machina Does
+## What It Does
 
-- **Socratic Teaching**: Guides discovery through targeted questions instead of giving answers
-- **Prompt Auditing**: Systematic analysis of bloated, inefficient prompts
-- **Pattern Recognition**: Helps users identify common optimization opportunities
-- **Filecoin Storage**: Store and retrieve optimized prompts on Filecoin network
+MachinaMachina gives you three AI agents that work together:
 
-## Core Methodology
+**Prompt Agent** - Optimizes your AI prompts to reduce tokens and improve outputs. Detects bias and inefficiencies through guided questioning.
 
-Machina uses a four-step audit process:
+**Filecoin Agent** - Handles decentralized storage on Filecoin network. Opens browser sessions, requests testnet tokens, and provides real-time education.
 
-1. **Fluff Detection** - Guide identification of unnecessary qualifiers and filler words
-2. **Redundancy Analysis** - Help spot repeated concepts and overlapping phrases
-3. **Precision Enhancement** - Lead discovery of vague terms that need specification
-4. **Core Extraction** - Facilitate identification of the essential request beneath bloat
+**Synthik Agent** - Generates synthetic datasets for any use case. Creates training data, test data, and human-readable content.
 
 ## Quick Start
 
-1. **Install dependencies**:
-   ```bash
-   pnpm install
-   ```
-
-2. **Set up environment**:
-   Create a `.env` file with your API keys:
-   ```
-   GOOGLE_GENERATIVE_AI_API_KEYGOOGLE_GENERATIVE_AI_API_KEY=your_google_api_keyyour_google_api_key
-   FILECOIN_API_KEY=your_filecoin_api_key
-   ```
-
-3. **Run the application**:
-   ```bash
-   pnpm dev
-   ```
-
-## Key Features
-
-### Guided Prompt Optimization
-- Socratic questioning to identify inefficiencies
-- Step-by-step audit workflow
-- Self-discovery learning approach
-- Pattern recognition training
-
-### Filecoin Integration
-- Store optimized prompts permanently
-- Retrieve prompt libraries
-- Decentralized prompt management
-- Version control for prompt iterations
-
-### Audit Categories
-- **Fluff Words**: "What words add no functional value?"
-- **Redundancy**: "Where do you see repeated concepts?"
-- **Precision Gaps**: "Which terms are too vague to be actionable?"
-- **Core Request**: "What is the essential ask here?"
-
-## Usage
-
-```typescript
-import { mastra } from './src/mastra';
-
-// Start prompt optimization session
-const result = await mastra.runWorkflow('prompt-audit-workflow', {
-  bloatedPrompt: 'Your verbose prompt here...',
-  auditLevel: 'comprehensive',
-  storageOption: 'filecoin'
-});
-
-// Store optimized prompt on Filecoin
-const storage = await mastra.getTool('filecoin-storage').execute({
-  prompt: optimizedPrompt,
-  category: 'business-strategy',
-  tags: ['efficiency', 'marketing']
-});
+```bash
+git clone https://github.com/fozagtx/machinalabs
+cd machinalabs
+pnpm install
+pnpm dev
 ```
 
-## Learning Process
+Set up your `.env` file:
+```
+GOOGLE_GENERATIVE_AI_API_KEY=your_key
+BRAVE_SEARCH_API_KEY=your_key
+```
 
-1. **Submit Bloated Prompt** - Provide inefficient prompt for analysis
-2. **Guided Questioning** - Answer targeted diagnostic questions
-3. **Pattern Discovery** - Identify optimization opportunities yourself
-4. **Core Extraction** - Distill to essential request
-5. **Filecoin Storage** - Save optimized version permanently
+## Core Features
 
-## Audit Workflow
+**Web Search** - Brave Search API integration for real-time information
 
-### Question Types
-- "What words here add no functional value to the request?"
-- "Where do you see the same concept expressed multiple times?"
-- "Which terms are too vague to be actionable?"
-- "If you had to express this in one clear sentence, what would it be?"
+**Browser Automation** - Puppeteer-powered web navigation for Filecoin testnet operations
 
-### Success Criteria
-- User actively identifies specific inefficiencies
-- User develops pattern recognition skills
-- User can articulate core requests clearly
-- User gains systematic optimization confidence
+**Bias Detection** - Identifies problematic patterns in prompts
 
-## Components
+**Decentralized Storage** - Permanent storage on Filecoin network
 
-### Teaching Engine
-- Socratic questioning system
-- Progressive disclosure of insights
-- Adaptive questioning based on user progress
+**Dataset Generation** - Custom synthetic data for ML training and testing
 
-### Filecoin Integration
-- Decentralized prompt storage
-- Immutable optimization history
-- Community prompt sharing
-- Cross-device synchronization
+## How It Works
 
-### Audit Tools
-- Fluff detection algorithms
-- Redundancy pattern matching
-- Precision gap analysis
-- Core extraction validation
+The Prompt Agent uses Socratic questioning to help you identify inefficiencies in your prompts. Instead of giving direct answers, it guides you to discover optimization opportunities yourself.
 
-## Development
+The Filecoin Agent opens browsers to help you navigate Filecoin hosting, automatically requests testnet tokens (USDC & tFIL), and teaches you about decentralized storage.
 
-To extend MachinaMachina:
+The Synthik Agent creates realistic datasets based on your specifications, adapting to any domain or industry requirements.
 
-1. **Add question templates**: Expand Socratic questioning library
-2. **Create audit categories**: Define new optimization patterns
-3. **Implement storage options**: Extend Filecoin integration
-4. **Build learning paths**: Create progressive skill modules
+## Tech Stack
 
-## Dependencies
+![Mastra](https://img.shields.io/badge/Mastra-AI_Framework-blue?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDJMMTMuMDkgOC4yNkwyMSA5TDEzLjA5IDE1Ljc0TDEyIDIyTDEwLjkxIDE1Ljc0TDMgOUwxMC45MSA4LjI2TDEyIDJaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K) ![Filecoin](https://img.shields.io/badge/Filecoin-Storage-0090ff?style=for-the-badge&logo=filecoin&logoColor=white) ![Synthik](https://img.shields.io/badge/Synthik-Data_Generator-FF6B6B?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTMgM0gyMVYyMUgzVjNaTTUgNVYxOUgxOVY1SDVaTTcgN0gxN1Y5SDdWN1pNNyAxMUgxM1YxM0g3VjExWk03IDE1SDEwVjE3SDdWMTVaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K) ![Puppeteer](https://img.shields.io/badge/Puppeteer-Automation-40B5A8?style=for-the-badge&logo=puppeteer&logoColor=white) ![Google AI](https://img.shields.io/badge/Google-Generative_AI-4285F4?style=for-the-badge&logo=google&logoColor=white) ![Brave Search](https://img.shields.io/badge/Brave-Search_API-FB542B?style=for-the-badge&logo=brave&logoColor=white)
 
-- `@mastra/core`: Core framework
-- `@googlegoogle/generative-aigenerative-ai`: Google Generative AIGoogle Generative AI integration
-- `@filecoin/client`: Filecoin storage integration
-- `ai`: AI SDK
-- `zod`: Schema validation
+Built on Mastra AI framework with Google Generative AI, Filecoin network integration, Brave Search API, and Puppeteer for browser automation.
+
+## Use Cases
+
+- Reduce AI API costs through prompt optimization
+- Store optimized prompts permanently on decentralized storage
+- Generate training data for machine learning models
+- Create realistic test datasets for applications
+- Learn prompt engineering through guided practice
+
+## Documentation
+
+The platform includes automated documentation navigation - agents can open relevant docs based on your requests.
+
+### API Documentation
+- [Synthik Labs API Documentation](https://github.com/Synthik-Labs/docs) - Complete API reference for synthetic data generation
