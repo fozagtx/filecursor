@@ -41,8 +41,6 @@ export const browserTool = createTool({
   }),
   execute: async ({ context }) => {
     const { action, url, query } = context;
-
-    // Browser automation function
     const openBrowser = async (
       targetUrl: string,
       title: string,
@@ -50,8 +48,6 @@ export const browserTool = createTool({
     ) => {
       try {
         console.log(`🌐 Opening browser for ${title}...`);
-
-        // Launch browser (try Brave first, fallback to Chrome, then default)
         let browser;
         try {
           browser = await puppeteer.launch({
